@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+#decorator
+
 import functools
 
 def log(text):
