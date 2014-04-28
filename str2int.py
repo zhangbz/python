@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+#map reduce
+
 def str2int(s):
     def fn(x, y):
         return x * 10 + y
