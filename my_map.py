@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+#my_map
+
 def my_map(f, *list):
     newlist = []
     for x in list:
