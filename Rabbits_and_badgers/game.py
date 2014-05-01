@@ -100,3 +100,5 @@ while 1:
         playerpos[0] -= 5
     elif keys[3]:
         playerpos[0] +=  5
+
+
