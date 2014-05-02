@@ -84,6 +84,18 @@ while 1:
         if badrect.left < 64:
             healthvalue -= random.randint(5, 20)
             badguys.pop(index)
+        #6.3.2 - Check for collisions
+        index1 = 0
+        for bullet in arrows:
+            bullrect = pygame.Rect(arrow.get_rect())
+            bullrect.left = bullet[1]
+            bullrect.top = bullet[2]
+            if badrect.colliderect(bullrect):
+                acc[0] += 1
+                badguys.pop(index)
+                arrows.pop(index1)
+            index1 += 1
+
         #6.3.3 - Next bad guy
         index += 1
     for badguy in badguys:
