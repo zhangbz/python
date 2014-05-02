@@ -9,6 +9,7 @@ from pygame.locals import *
 
 #2 - Initalize the game
 pygame.init()
+pygame.mixer.init()
 width,height = 640, 480
 screen = pygame.display.set_mode((width, height))
 keys = [False, False, False, False]
@@ -31,6 +32,15 @@ healthbar = pygame.image.load("resources/images/healthbar.png")
 health = pygame.image.load("resources/images/health.png")
 gameover = pygame.image.load("resources/images/gameover.png")
 youwin = pygame.image.load("resources/images/youwin.png")
+hit = pygame.mixer.Sound("resources/audio/explore.wav")
+enemy = pygame.mixer.Sound("resources/audio/enemy.wav")
+shoot = pygame.mixer.Sound("resources/audio/shoot.wav")
+hit.set_volume(0.05)
+enemy.set_volume(0.05)
+shoot.set_volume(0.05)
+pygame.mixer.music.load('resources/audio/moonlight.wav')
+pygame.mixer.music.play(-1,  0.0)
+pygame.mixer.music.set_volume(0.25)
 
 #4 - keep looping through
 running = 1
@@ -89,6 +99,7 @@ while running:
         badrect.top = badguy[1]
         badrect.left = badguy[0]
         if badrect.left < 64:
+            hit.play()
             healthvalue -= random.randint(5, 20)
             badguys.pop(index)
         #6.3.2 - Check for collisions
@@ -98,6 +109,7 @@ while running:
             bullrect.left = bullet[1]
             bullrect.top = bullet[2]
             if badrect.colliderect(bullrect):
+                enemy.play()
                 acc[0] += 1
                 badguys.pop(index)
                 arrows.pop(index1)
@@ -128,6 +140,7 @@ while running:
             exit(0)
 
         if event.type == pygame.KEYDOWN:
+            shoot.play()
             if event.key == K_w:
                 keys[0] = True
             elif event.key == K_a:
