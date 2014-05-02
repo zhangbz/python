@@ -27,6 +27,8 @@ castle = pygame.image.load("resources/images/castle.png")
 arrow = pygame.image.load("resources/images/bullet.png")
 badguyimg1 = pygame.image.load("resources/images/badguy.png")
 badguyimg = badguyimg1
+healthbar = pygame.image.load("resources/images/healthbar.png")
+health = pygame.image.load("resources/images/health.png")
 
 #4 - keep looping through
 while 1:
@@ -101,7 +103,16 @@ while 1:
     for badguy in badguys:
         screen.blit(badguyimg, badguy)
     badtimer -= 1
-
+    #6.4 - Draw clock
+    font = pygame.font.Font(None, 24)
+    survivedtext = font.render(str((90000 - pygame.time.get_ticks())/60000) + ":" + str((90000 - pygame.time.get_ticks())/1000 % 60).zfill(2), True, (0, 0, 0))
+    textRect = survivedtext.get_rect()
+    textRect.topright = [635, 5]
+    screen.blit(survivedtext, textRect)
+    #6.5 - Draw health bar
+    screen.blit(healthbar, (5, 5))
+    for health1 in range(healthvalue):
+        screen.blit(health, (health1 + 8, 8))
     #7 - update the screen
     pygame.display.flip()
     #8 - loop through the events
