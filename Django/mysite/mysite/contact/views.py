@@ -18,4 +18,4 @@ def contact(request):
                 request.POST.get('email', 'noreply@example.com'),['siteowner@example.com'],
                 )
             return HttpResponseRedirect('/contact/thanks')
-    return render_to_response('contact_form.html', {'errors': errors})
+    return render_to_response('contact_form.html', {'errors': errors, 'subject':request.POST.get('subject', ''), 'message': request.POST.get('message', ''), 'email': request.POST.get('email', ''), })
