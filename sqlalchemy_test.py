@@ -17,6 +17,17 @@ class User(Base):
     #表的结构：
     id = Column(String(20), primary_key = True)
     name = Column(String(20))
+    #一对多：
+    #books = relationship('Book')
+'''
+class Book(Base):
+    __tablename__ = 'book'
+
+    id = Column(String(20), primary_key = True)
+    name = Column(String(20))
+    #“多”的一方的book表是通过外键关联到user表的：
+    user_id = Column(String(20), ForeignKey('user.id'))
+'''
 
 #初始化数据库连接:
 engine = create_engine('mysql+mysqlconnector://root:baozhi720725@localhost:3306/test')
@@ -26,7 +37,7 @@ DBSession = sessionmaker(bind = engine)
 #创建session对象：
 session = DBSession()
 #创建新User对象：
-new_user = User(id = '5', name = 'Bob')
+new_user = User(id = '6', name = 'Bob')
 #添加到session:
 session.add(new_user)
 #提交即保存到数据库:
