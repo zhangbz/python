@@ -27,3 +27,19 @@ def classify0(inX, dataSet, labels, k):
     #排序
     sortedClassCount = sorted(classCount.iteritems(),key = operator.itemgetter(1), reverse = True)
     return sortedClassCount[0][0]
+
+def file2matrix(filename):
+    fr = open(filename)
+    arrayOLines = fr.readlines()
+    numberOfLines = len(arrayOLines) #得到文件行数
+    returnMat = zeros((numberOfLines, 3)) #创建返回的numpy矩阵
+    classLabelVector = []
+    index = 0
+    #解析文件数据到列表
+    for line in arrayOLines:
+        line = line.strip()
+        listFromline = line.split('\t') #split分割字符串， 返回列表
+        returnMat[index,:] = listFromline[0:3]
+        classLabelVector.append(int(listFromline[-1]))
+        index += 1
+    return returnMat, classLabelVector
